@@ -1,0 +1,111 @@
+package com.example.uas_tam_kel2
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.uas_tam_kel2.ui.theme.UAS_TAM_kel2Theme
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            UAS_TAM_kel2Theme {
+                // A surface container using the 'background' color from the theme
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = Color.Black // Set background color to black
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        CardItem(
+                            title = "Hobi dan komunitas",
+                            description = "Federasi Olah Raga Mancing Seluruh Indonesia (FORMASI)",
+                            imageRes = R.drawable.ic_hobby
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        CardItem(
+                            title = "Event Kesehatan Gigi",
+                            description = "Siapa bilang jika aktivitas memancing merupakan kegiatan yang membosankan.",
+                            imageRes = R.drawable.ic_event
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun CardItem(title: String, description: String, imageRes: Int, modifier: Modifier = Modifier) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(Color.DarkGray, RoundedCornerShape(8.dp)) // Change card background color
+            .padding(16.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Image(
+            painter = painterResource(id = imageRes),
+            contentDescription = null,
+            modifier = Modifier
+                .size(40.dp)
+                .padding(end = 8.dp),
+            contentScale = ContentScale.Crop
+        )
+        Column(modifier = Modifier.weight(1f)) {
+            Text(
+                text = title,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White // Set text color to white for better visibility
+            )
+            Text(
+                text = description,
+                fontSize = 14.sp,
+                color = Color.White, // Set text color to white for better visibility
+                maxLines = 2
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    UAS_TAM_kel2Theme {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = Color.Black // Set preview background color to black
+        ) {
+            Column(modifier = Modifier.padding(16.dp)) {
+                CardItem(
+                    title = "Hobi dan komunitas",
+                    description = "Federasi Olah Raga Mancing Seluruh Indonesia (FORMASI)",
+                    imageRes = R.drawable.ic_hobby
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                CardItem(
+                    title = "Event Kesehatan Gigi",
+                    description = "Siapa bilang jika aktivitas memancing merupakan kegiatan yang membosankan.",
+                    imageRes = R.drawable.ic_event
+                )
+            }
+        }
+    }
+}
